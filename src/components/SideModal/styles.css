@@ -1,0 +1,37 @@
+/* src/components/SideModal/SideModal.css */
+.side-modal {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 30%; /* Ajuste a largura conforme necessário */
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-modal.open {
+  right: 0;
+}
+
+.side-modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.side-modal-body {
+  flex: 1;
+  padding: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: flex-end;
+  padding: 10px;
+}

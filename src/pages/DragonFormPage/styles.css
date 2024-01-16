@@ -1,0 +1,39 @@
+/* src/pages/DragonFormPage/DragonFormPage.css */
+.dragon-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .dragon-form-container h1 {
+    text-align: center;
+  }
+  
+  .dragon-form-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .dragon-form-container input,
+  .dragon-form-container select,
+  .dragon-form-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .dragon-form-container button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .dragon-form-container button:hover {
+    background-color: #45a049;
+  }
+  

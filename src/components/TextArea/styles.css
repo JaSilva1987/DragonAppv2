@@ -1,0 +1,17 @@
+/* src/components/TextArea/TextArea.css */
+.textarea-container {
+    margin-bottom: 15px;
+  }
+  
+  .textarea-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .textarea-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
