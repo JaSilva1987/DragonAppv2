@@ -1,21 +1,18 @@
-import { Dragon } from "./interfaces";
+// src/services/DragonService.ts
+import axios from "axios";
+import { Dragon } from "../pages/Home/interfaces";
 
 const API_URL = "http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon";
 
 const DragonService = {
   getAllDragons: async (): Promise<Dragon[]> => {
-    try {
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error("Failed to fetch dragons");
-      }
+    const response = await axios.get(API_URL);
+    return response.data;
+  },
 
-      const data = await response.json();
-      return data as Dragon[];
-    } catch (error) {
-      console.error("Error fetching dragons:", error);
-      throw error;
-    }
+  getDragonById: async (dragonId: string): Promise<Dragon> => {
+    const response = await axios.get(`${API_URL}/${dragonId}`);
+    return response.data;
   },
 };
 

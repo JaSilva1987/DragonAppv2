@@ -1,4 +1,3 @@
-// src/components/Select/Select.tsx
 import React from "react";
 import "./styles.css";
 import { SelectProps } from "./interfaces";

@@ -1,4 +1,3 @@
-// src/components/Input/Input.tsx
 import React from "react";
 import "./styles.css";
 import { InputProps } from "./interfaces";

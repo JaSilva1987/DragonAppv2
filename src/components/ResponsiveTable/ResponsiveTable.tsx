@@ -1,4 +1,3 @@
-// src/components/ResponsiveTable/ResponsiveTable.tsx
 import React from "react";
 import "./styles.css";
 import { ResponsiveTableProps } from "./interfaces";

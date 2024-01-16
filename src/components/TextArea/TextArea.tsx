@@ -1,4 +1,3 @@
-// src/components/TextArea/TextArea.tsx
 import React from "react";
 import "./styles.css";
 import { TextAreaProps } from "./interfaces";

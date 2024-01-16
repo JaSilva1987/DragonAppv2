@@ -1,0 +1,15 @@
+.dragon-details-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .dragon-details-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .dragon-details-info {
+    margin-bottom: 10px;
+  }
+  

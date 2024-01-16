@@ -1,9 +1,9 @@
-/* src/components/SideModal/SideModal.css */
+
 .side-modal {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 30%; /* Ajuste a largura conforme necessário */
+  width: 30%; 
   height: 100%;
   background: white;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);

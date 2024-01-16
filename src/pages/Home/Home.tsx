@@ -1,22 +1,34 @@
 // src/pages/Home/Home.tsx
 import React, { useEffect, useState } from "react";
-import { ResponsiveTable, Button, SideModal } from "../../components";
-import { useNavigate } from "react-router-dom";
-import "./styles.css";
 import DragonService from "../../services/DragonService";
-import DragonFormPage from "../DragonFormPage/DragonFormPage";
+import { ResponsiveTable, Button, SideModal } from "../../components";
+import { Dragon } from "./interfaces";
+import DragonDetailsPage from "../DragonDetailsPage/DragonDetailsPage";
 
 const Home: React.FC = () => {
-  const [dragons, setDragons] = useState<any[]>([]);
+  const [dragons, setDragons] = useState<Dragon[]>([]);
+  const [selectedDragon, setSelectedDragon] = useState<Dragon | null>(null);
   const [isSideModalOpen, setIsSideModalOpen] = useState(false);
-
-  const navigate = useNavigate(); // Alteração na declaração
 
   useEffect(() => {
     const fetchDragons = async () => {
       try {
-        const dragonData = await DragonService.getAllDragons();
-        setDragons(dragonData);
+        const dragonData: Dragon[] = await DragonService.getAllDragons();
+
+        const dragonsWithAction = dragonData.map((dragon) => ({
+          ...dragon,
+          action: (
+            <Button
+              label="Detalhes"
+              onClick={() => {
+                setSelectedDragon(dragon);
+                setIsSideModalOpen(true);
+              }}
+            />
+          ),
+        }));
+
+        setDragons(dragonsWithAction);
       } catch (error) {
         console.error("Error fetching dragons:", error);
       }
@@ -25,16 +37,7 @@ const Home: React.FC = () => {
     fetchDragons();
   }, []);
 
-  const headers = ["id", "name", "type"];
-
-  const handleNewDragonClick = () => {
-    setIsSideModalOpen(true);
-  };
-
-  const handleAddNewDragonClick = () => {
-    setIsSideModalOpen(false);
-    navigate("/new-dragon"); // Alteração aqui para usar navigate
-  };
+  const headers = ["id", "name", "type", "action"];
 
   return (
     <>
@@ -43,13 +46,21 @@ const Home: React.FC = () => {
         <ResponsiveTable headers={headers} data={dragons} />
       </div>
       <div className="button-container">
-        <Button label="Novo Dragão" onClick={handleNewDragonClick} />
+        <Button
+          label="Novo Dragão"
+          onClick={() => {
+            console.log("Novo Dragão clicado!");
+          }}
+        />
       </div>
       <SideModal
         isOpen={isSideModalOpen}
-        onClose={() => setIsSideModalOpen(false)}
+        onClose={() => {
+          setIsSideModalOpen(false);
+          setSelectedDragon(null);
+        }}
       >
-        <DragonFormPage />
+        {selectedDragon && <DragonDetailsPage dragon={selectedDragon} />}
       </SideModal>
     </>
   );

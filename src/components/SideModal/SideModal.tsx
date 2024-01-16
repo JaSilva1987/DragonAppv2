@@ -1,4 +1,3 @@
-// src/components/SideModal/SideModal.tsx
 import React, { PropsWithChildren } from "react";
 import "./styles.css";
 import { SideModalProps } from "./interface";
