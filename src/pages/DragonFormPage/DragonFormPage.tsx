@@ -1,42 +1,38 @@
-// src/pages/DragonFormPage/DragonFormPage.tsx
 import React, { useState } from "react";
-import { Input, Select, TextArea, Button, SideModal } from "../../components";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Input, Select, TextArea, Button } from "../../components";
+import DragonService from "../../services/DragonService";
+import "./styles.css";
 
-const DragonFormPage: React.FC = () => {
+interface DragonFormPageProps {
+  onClose?: () => void;
+}
+
+const DragonFormPage: React.FC<DragonFormPageProps> = ({ onClose }) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [histories, setHistories] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
 
-  const handleSaveDragon = async () => {
+  const handleSaveDragon = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon",
-        {
-          name,
-          type,
-          histories,
-          createdAt: new Date().toISOString(),
-        }
-      );
+      await DragonService.createDragon({
+        name,
+        type,
+        histories,
+        createdAt: new Date().toISOString(),
+      });
 
-      console.log("Dragão criado com sucesso:", response.data);
-      // Adicione lógica para atualizar o estado local (se necessário)
-      //setIsModalOpen(false);
-      //navigate("/"); // Navegue de volta para a página Home ou para onde for apropriado
+      console.log("Dragão criado com sucesso!");
+      onClose?.(); // Fecha o modal após o salvamento
     } catch (error) {
       console.error("Erro ao salvar dragão:", error);
-      // Adicione lógica de tratamento de erros (se necessário)
     }
   };
 
   return (
     <div className="dragon-form-container">
       <h1>Novo Dragão</h1>
-      <form>
+      <form onSubmit={handleSaveDragon}>
         <Input
           label="Nome"
           value={name}
@@ -53,7 +49,7 @@ const DragonFormPage: React.FC = () => {
           value={histories}
           onChange={(e) => setHistories(e.target.value)}
         />
-        <Button label="Salvar Dragão" onClick={handleSaveDragon} />
+        <Button type="submit" label="Salvar Dragão" />
       </form>
     </div>
   );

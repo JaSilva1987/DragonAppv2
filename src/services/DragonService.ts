@@ -4,16 +4,36 @@ import { Dragon } from "../pages/Home/interfaces";
 
 const API_URL = "http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon";
 
-const DragonService = {
-  getAllDragons: async (): Promise<Dragon[]> => {
-    const response = await axios.get(API_URL);
-    return response.data;
-  },
-
-  getDragonById: async (dragonId: string): Promise<Dragon> => {
-    const response = await axios.get(`${API_URL}/${dragonId}`);
-    return response.data;
-  },
+const getAllDragons = async (): Promise<Dragon[]> => {
+  const response = await axios.get(API_URL);
+  return response.data;
 };
 
-export default DragonService;
+const getDragonById = async (id: string): Promise<Dragon> => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
+};
+
+const deleteDragon = async (id: string): Promise<void> => {
+  await axios.delete(`${API_URL}/${id}`);
+};
+
+const removeDragon = async (id: string): Promise<Dragon[]> => {
+  await axios.delete(`${API_URL}/${id}`);
+  return getAllDragons(); // Retorna a lista atualizada após a remoção
+};
+
+const createDragon = async (
+  dragonData: Omit<Dragon, "id">
+): Promise<Dragon> => {
+  const response = await axios.post(API_URL, dragonData);
+  return response.data;
+};
+
+export default {
+  getAllDragons,
+  getDragonById,
+  deleteDragon,
+  removeDragon,
+  createDragon,
+};

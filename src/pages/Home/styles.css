@@ -3,4 +3,8 @@
     top: 20px;
     right: 20px;
   }
-  
+
+  .action-buttons {
+    display: flex;
+    gap: 8px; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+  }
