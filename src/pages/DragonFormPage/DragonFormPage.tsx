@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Input, Select, TextArea, Button } from "../../components";
 import DragonService from "../../services/DragonService";
 import "./styles.css";
+import { DragonFormPageProps } from "./interfaces";
 
-interface DragonFormPageProps {
-  onClose?: () => void;
-}
-
-const DragonFormPage: React.FC<DragonFormPageProps> = ({ onClose }) => {
+const DragonFormPage: React.FC<DragonFormPageProps> = ({
+  onClose,
+  updateDragonList,
+}) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [histories, setHistories] = useState("");
@@ -15,7 +15,7 @@ const DragonFormPage: React.FC<DragonFormPageProps> = ({ onClose }) => {
   const handleSaveDragon = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await DragonService.createDragon({
+      const response = await DragonService.createDragon({
         name,
         type,
         histories,
@@ -24,6 +24,9 @@ const DragonFormPage: React.FC<DragonFormPageProps> = ({ onClose }) => {
 
       console.log("Dragão criado com sucesso!");
       onClose?.(); // Fecha o modal após o salvamento
+
+      // Chama a função de atualização na Home
+      updateDragonList(response);
     } catch (error) {
       console.error("Erro ao salvar dragão:", error);
     }

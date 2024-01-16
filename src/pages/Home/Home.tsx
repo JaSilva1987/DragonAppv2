@@ -77,6 +77,10 @@ const Home: React.FC = () => {
     );
   };
 
+  const updateDragonList = (newDragon: Dragon) => {
+    setDragons((prevDragons) => [...prevDragons, newDragon]);
+  };
+
   return (
     <>
       <div>
@@ -90,7 +94,10 @@ const Home: React.FC = () => {
         {selectedDragon ? (
           <DragonDetailsPage dragon={selectedDragon} />
         ) : isNewDragonFormOpen ? (
-          <DragonFormPage onClose={handleCloseModal} />
+          <DragonFormPage
+            onClose={handleCloseModal}
+            updateDragonList={updateDragonList}
+          />
         ) : null}
       </SideModal>
     </>

@@ -20,7 +20,7 @@ const deleteDragon = async (id: string): Promise<void> => {
 
 const removeDragon = async (id: string): Promise<Dragon[]> => {
   await axios.delete(`${API_URL}/${id}`);
-  return getAllDragons(); // Retorna a lista atualizada após a remoção
+  return getAllDragons();
 };
 
 const createDragon = async (
@@ -30,10 +30,16 @@ const createDragon = async (
   return response.data;
 };
 
+const updateDragon = async (id: string, dragon: Dragon): Promise<Dragon> => {
+  const response = await axios.put(`${API_URL}/${id}`, dragon);
+  return response.data;
+};
+
 export default {
   getAllDragons,
   getDragonById,
   deleteDragon,
   removeDragon,
   createDragon,
+  updateDragon,
 };
